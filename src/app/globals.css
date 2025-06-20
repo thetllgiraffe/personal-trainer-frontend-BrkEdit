@@ -1,8 +1,91 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 255, 255, 255;
+  --foreground: 15, 23, 42;
+  --card: 255, 255, 255;
+  --card-foreground: 15, 23, 42;
+  --popover: 255, 255, 255;
+  --popover-foreground: 15, 23, 42;
+  --primary: 219, 39, 119;
+  --primary-foreground: 255, 255, 255;
+  --secondary: 243, 244, 246;
+  --secondary-foreground: 15, 23, 42;
+  --muted: 243, 244, 246;
+  --muted-foreground: 100, 116, 139;
+  --accent: 243, 244, 246;
+  --accent-foreground: 15, 23, 42;
+  --destructive: 239, 68, 68;
+  --destructive-foreground: 255, 255, 255;
+  --border: 226, 232, 240;
+  --input: 226, 232, 240;
+  --ring: 219, 39, 119;
+  --radius: 0.5rem;
+  --toast-bg: #333;
+  --toast-color: #fff;
+}
+
+.dark {
+  --background: 15, 23, 42;
+  --foreground: 226, 232, 240;
+  --card: 31, 41, 55;
+  --card-foreground: 226, 232, 240;
+  --popover: 31, 41, 55;
+  --popover-foreground: 226, 232, 240;
+  --primary: 244, 114, 182;
+  --primary-foreground: 15, 23, 42;
+  --secondary: 31, 41, 55;
+  --secondary-foreground: 226, 232, 240;
+  --muted: 31, 41, 55;
+  --muted-foreground: 148, 163, 184;
+  --accent: 31, 41, 55;
+  --accent-foreground: 226, 232, 240;
+  --destructive: 248, 114, 114;
+  --destructive-foreground: 15, 23, 42;
+  --border: 51, 65, 85;
+  --input: 51, 65, 85;
+  --ring: 244, 114, 182;
+  --toast-bg: #1f2937;
+  --toast-color: #f3f4f6;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Smooth transitions for dark mode */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+.dark::view-transition-old(root) {
+  z-index: 2;
+}
+.dark::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* Smooth theme transitions */
+* {
+  transition-property: color, background-color, border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
 }
 
 @theme inline {
@@ -23,4 +106,127 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.backdrop-blur {
+  --tw-backdrop-blur: none;
+}
+
+/* Calendar Custom Styling */
+.custom-calendar {
+  width: 100%;
+  max-width: 400px;
+  background: transparent !important;
+  border: none !important;
+  font-family: inherit;
+}
+
+.custom-calendar .react-calendar__navigation {
+  margin-bottom: 1.5rem;
+}
+
+.custom-calendar .react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+  font-size: 1rem;
+  color: var(--foreground);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.custom-calendar .react-calendar__navigation button:enabled:hover,
+.custom-calendar .react-calendar__navigation button:enabled:focus {
+  background-color: rgba(236, 72, 153, 0.1);
+  color: rgb(236, 72, 153);
+}
+
+.custom-calendar .react-calendar__navigation button[disabled] {
+  opacity: 0.5;
+  background-color: transparent;
+}
+
+.custom-calendar .react-calendar__month-view__weekdays {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--foreground);
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+}
+
+.custom-calendar .react-calendar__month-view__days__day {
+  padding: 0.75rem;
+  background: none;
+  color: var(--foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.custom-calendar .react-calendar__month-view__days__day:enabled:hover,
+.custom-calendar .react-calendar__month-view__days__day:enabled:focus {
+  background-color: rgba(236, 72, 153, 0.1);
+  color: rgb(236, 72, 153);
+}
+
+.custom-calendar .react-calendar__month-view__days__day--weekend {
+  color: rgb(236, 72, 153);
+}
+
+.custom-calendar .react-calendar__month-view__days__day--neighboringMonth {
+  opacity: 0.4;
+}
+
+.custom-calendar .react-calendar__tile--now {
+  background-color: rgba(236, 72, 153, 0.1) !important;
+  color: rgb(236, 72, 153);
+}
+
+.custom-calendar .react-calendar__tile--active,
+.custom-calendar .react-calendar__tile--active:enabled:hover,
+.custom-calendar .react-calendar__tile--active:enabled:focus {
+  background-color: rgb(236, 72, 153) !important;
+  color: white;
+}
+
+.custom-calendar .react-calendar__tile--active .block {
+  background-color: white !important;
+}
+
+.custom-calendar .react-calendar__tile:disabled {
+  opacity: 0.5;
+  background-color: transparent;
+}
+
+.custom-calendar .react-calendar__tile {
+  position: relative;
+  padding: 0.75rem 0.5rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.custom-calendar abbr {
+  text-decoration: none;
+}
+
+/* Dark mode adjustments */
+:is(.dark) .custom-calendar .react-calendar__navigation button:enabled:hover,
+:is(.dark) .custom-calendar .react-calendar__navigation button:enabled:focus,
+:is(.dark) .custom-calendar .react-calendar__month-view__days__day:enabled:hover,
+:is(.dark) .custom-calendar .react-calendar__month-view__days__day:enabled:focus {
+  background-color: rgba(236, 72, 153, 0.2);
+}
+
+:is(.dark) .custom-calendar .react-calendar__tile--now {
+  background-color: rgba(236, 72, 153, 0.2) !important;
+}
+
+:is(.dark) .custom-calendar .react-calendar__month-view__weekdays {
+  opacity: 0.8;
 }
