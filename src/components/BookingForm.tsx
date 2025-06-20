@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { API_URL } from '../utils/api-config'
 
 export function BookingForm() {
   const router = useRouter()
@@ -36,7 +37,7 @@ export function BookingForm() {
 
     try {
       console.log('Submitting booking:', form)
-      const res = await fetch('http://localhost:4000/api/client/bookings', {
+      const res = await fetch(`${API_URL}/api/client/bookings`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
