@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import { motion, AnimatePresence } from 'framer-motion'
+import { API_URL } from '../utils/api-config'
 
 type Booking = {
   id: number
@@ -22,7 +23,7 @@ export function BookingCalendar() {
 
   useEffect(() => {
     const token = localStorage.getItem('dashboard_token')
-    fetch('http://localhost:4000/api/bookings', {
+    fetch(`${API_URL}/api/bookings`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())

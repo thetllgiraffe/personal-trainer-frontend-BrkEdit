@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { API_URL } from '../../../utils/api-config'
 
 type Booking = {
   id: number
@@ -30,7 +31,7 @@ export default function ClientDashboard() {
 
     const loadingToast = toast.loading('Loading your bookings...')
 
-    fetch('http://localhost:4000/api/client/bookings', {
+    fetch(`${API_URL}/api/client/bookings`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => {

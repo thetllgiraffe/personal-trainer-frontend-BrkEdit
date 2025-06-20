@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { API_URL } from '../../../utils/api-config'
 
 export default function ClientRegisterPage() {
   const [form, setForm] = useState({ name: '', email: '', password: '' })
@@ -16,7 +17,7 @@ export default function ClientRegisterPage() {
     e.preventDefault()
     setError('')
     setSuccess(false)
-    const res = await fetch('http://localhost:4000/api/client/register', {
+    const res = await fetch(`${API_URL}/api/client/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
