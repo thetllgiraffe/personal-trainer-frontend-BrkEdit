@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { API_URL } from '../../utils/api-config'
 
 type Booking = {
   id: number
@@ -28,7 +29,7 @@ export default function DashboardPage() {
       return
     }
     try {
-      const res = await fetch('http://localhost:4000/api/bookings', {
+      const res = await fetch(`${API_URL}/api/bookings`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       if (res.status === 401) {
@@ -55,7 +56,7 @@ export default function DashboardPage() {
     if (!confirm('Are you sure you want to delete this booking?')) return
     const token = localStorage.getItem('dashboard_token')
     try {
-      const res = await fetch(`http://localhost:4000/api/bookings/${id}`, {
+      const res = await fetch(`${API_URL}/api/bookings/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -77,7 +78,7 @@ export default function DashboardPage() {
   ) => {
     const token = localStorage.getItem('dashboard_token')
     try {
-      const res = await fetch(`http://localhost:4000/api/bookings/${id}/status`, {
+      const res = await fetch(`${API_URL}/api/bookings/${id}/status`, {
         method: 'PATCH',
         headers: {
           Authorization: `Bearer ${token}`,
