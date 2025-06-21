@@ -99,7 +99,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(var(--background), 1);
+  background: limegreen !important;
   padding: 2rem;
   display: flex;
   flex-direction: column;
