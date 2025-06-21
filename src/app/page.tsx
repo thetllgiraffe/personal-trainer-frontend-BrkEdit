@@ -1,12 +1,12 @@
 'use client'
-/*
+
 import { useState, useEffect } from 'react'
 import { Testimonials } from '../components/Testimonials'
 import { BookingForm } from '../components/BookingForm'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import emailjs from '@emailjs/browser'
-*/
+
 export default function Home() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
@@ -124,7 +124,7 @@ export default function Home() {
               <div className='grid gap-4'>
                 <div className='relative h-[240px] rounded-2xl overflow-hidden'>
                   <Image
-                    src='ht#tps://images.unsplash.com/photo-1541534741688-6078c6bfb5c5'
+                    src='https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5'
                     alt='Trainer demonstrating exercise'
                     fill
                     style={{ objectFit: 'cover' }}
@@ -133,7 +133,7 @@ export default function Home() {
                 </div>
                 <div className='relative h-[240px] rounded-2xl overflow-hidden'>
                   <Image
-                    src='https://images.unsplash.co#m/photo-1599058945522-28d584b6f0ff'
+                    src='https://images.unsplash.com/photo-1599058945522-28d584b6f0ff'
                     alt='Training session'
                     fill
                     style={{ objectFit: 'cover' }}
