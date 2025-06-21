@@ -110,57 +110,100 @@ export default function DashboardPage() {
       ) : bookings.length === 0 ? (
         <div>No bookings yet.</div>
       ) : (
-        <div className='overflow-x-auto w-full max-w-4xl'>
-          <table className='min-w-full bg-white dark:bg-gray-900 rounded-xl shadow-xl'>
-            <thead>
-              <tr>
-                <th className='py-2 px-4 border-b dark:border-gray-700'>Name</th>
-                <th className='py-2 px-4 border-b dark:border-gray-700'>Email</th>
-                <th className='py-2 px-4 border-b dark:border-gray-700'>Phone</th>
-                <th className='py-2 px-4 border-b dark:border-gray-700'>Date</th>
-                <th className='py-2 px-4 border-b dark:border-gray-700'>Time</th>
-                <th className='py-2 px-4 border-b dark:border-gray-700'>Message</th>
-                <th className='py-2 px-4 border-b dark:border-gray-700'>Status</th>
-                <th className='py-2 px-4 border-b dark:border-gray-700'>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bookings.map((b) => (
-                <tr key={b.id}>
-                  <td className='py-2 px-4 border-b dark:border-gray-700'>{b.name}</td>
-                  <td className='py-2 px-4 border-b dark:border-gray-700'>{b.email}</td>
-                  <td className='py-2 px-4 border-b dark:border-gray-700'>{b.phone}</td>
-                  <td className='py-2 px-4 border-b dark:border-gray-700'>{b.date}</td>
-                  <td className='py-2 px-4 border-b dark:border-gray-700'>{b.time}</td>
-                  <td className='py-2 px-4 border-b dark:border-gray-700'>{b.message}</td>
-                  <td className='py-2 px-4 border-b dark:border-gray-700'>
-                    <select
-                      value={b.status}
-                      onChange={(e) =>
-                        handleStatusUpdate(
-                          b.id,
-                          e.target.value as 'pending' | 'confirmed' | 'completed'
-                        )
-                      }
-                      className='bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded px-2 py-1'
-                    >
-                      <option value='pending'>Pending</option>
-                      <option value='confirmed'>Confirmed</option>
-                      <option value='completed'>Completed</option>
-                    </select>
-                  </td>
-                  <td className='py-2 px-4 border-b dark:border-gray-700'>
-                    <button
-                      onClick={() => handleDelete(b.id)}
-                      className='bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded'
-                    >
-                      Delete
-                    </button>
-                  </td>
+        <div className='w-full max-w-5xl px-4'>
+          {/* Desktop Table View */}
+          <div className='hidden lg:block overflow-x-auto'>
+            <table className='min-w-full bg-white dark:bg-gray-800 rounded-xl shadow-xl'>
+              <thead className='bg-gray-50 dark:bg-gray-700'>
+                <tr>
+                  <th className='py-3 px-4 text-left'>Name</th>
+                  <th className='py-3 px-4 text-left'>Contact</th>
+                  <th className='py-3 px-4 text-left'>Date</th>
+                  <th className='py-3 px-4 text-left'>Time</th>
+                  <th className='py-3 px-4 text-left'>Status</th>
+                  <th className='py-3 px-4 text-left'>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className='divide-y divide-gray-200 dark:divide-gray-700'>
+                {bookings.map((b) => (
+                  <tr key={b.id}>
+                    <td className='py-3 px-4'>{b.name}</td>
+                    <td className='py-3 px-4'>
+                      <div>{b.email}</div>
+                      <div>{b.phone}</div>
+                    </td>
+                    <td className='py-3 px-4'>{b.date}</td>
+                    <td className='py-3 px-4'>{b.time}</td>
+                    <td className='py-3 px-4'>
+                      <select
+                        value={b.status}
+                        onChange={(e) => handleStatusUpdate(b.id, e.target.value as any)}
+                        className='bg-transparent border border-gray-300 dark:border-gray-600 rounded px-2 py-1'
+                      >
+                        <option value='pending'>Pending</option>
+                        <option value='confirmed'>Confirmed</option>
+                        <option value='completed'>Completed</option>
+                      </select>
+                    </td>
+                    <td className='py-3 px-4'>
+                      <button
+                        onClick={() => handleDelete(b.id)}
+                        className='bg-red-600 hover:bg-red-700 text-white font-bold px-3 py-1 rounded-md transition-colors'
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className='block lg:hidden space-y-4'>
+            {bookings.map((b) => (
+              <div key={b.id} className='bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4'>
+                <div className='flex justify-between items-start'>
+                  <div>
+                    <p className='font-bold text-lg text-pink-700 dark:text-pink-400'>{b.name}</p>
+                    <p className='text-sm text-gray-600 dark:text-gray-400'>
+                      {b.date} at {b.time}
+                    </p>
+                  </div>
+                  <select
+                    value={b.status}
+                    onChange={(e) => handleStatusUpdate(b.id, e.target.value as any)}
+                    className='bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 text-sm'
+                  >
+                    <option value='pending'>Pending</option>
+                    <option value='confirmed'>Confirmed</option>
+                    <option value='completed'>Completed</option>
+                  </select>
+                </div>
+                <div className='mt-4 border-t pt-4 dark:border-gray-700'>
+                  <p className='text-sm'>
+                    <span className='font-semibold'>Email:</span> {b.email}
+                  </p>
+                  <p className='text-sm'>
+                    <span className='font-semibold'>Phone:</span> {b.phone}
+                  </p>
+                  {b.message && (
+                    <p className='text-sm mt-2 italic bg-gray-50 dark:bg-gray-700 p-2 rounded'>
+                      "{b.message}"
+                    </p>
+                  )}
+                </div>
+                <div className='mt-4 flex justify-end'>
+                  <button
+                    onClick={() => handleDelete(b.id)}
+                    className='bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-2 rounded-md text-sm transition-colors'
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
