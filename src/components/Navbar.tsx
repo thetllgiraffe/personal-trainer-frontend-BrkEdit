@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import styles from './Navbar.module.css'
+import styles from './Navbar.styles.css'
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
