@@ -37,7 +37,7 @@ export function Navbar() {
     router.push('/client/login')
   }
 
-  const navClasses = `${styles.navbar} ${scrolled ? styles.scrolled : ''}`
+  const navClasses = `${styles.navbar} ${scrolled && !menuOpen ? styles.scrolled : ''}`
 
   return (
     <nav className={navClasses}>
