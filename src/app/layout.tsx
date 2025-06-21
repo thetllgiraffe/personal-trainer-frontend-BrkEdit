@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import './patterns.css'
 import { Providers } from './providers'
-import { Navbar } from '../components/Navbar'
+import { NavbarWrapper } from '../components/NavbarWrapper'
 import { DarkModeToggle } from '@/components/DarkModeToggle'
 import { Toaster } from 'react-hot-toast'
 
@@ -31,7 +31,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
-          <Navbar />
+          <NavbarWrapper />
           <div className='pt-16'>{children}</div>
           <DarkModeToggle />
           <Toaster
