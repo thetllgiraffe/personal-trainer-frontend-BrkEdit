@@ -97,7 +97,11 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className={styles.mobile_menu}>
+        <div
+          className={`${styles.mobile_menu} ${
+            theme === 'dark' ? styles.darkNavbar : styles.lightNavbar
+          }`}
+        >
           <Link href='/' className={styles.menu_item} onClick={() => setMenuOpen(false)}>
             Home
           </Link>
