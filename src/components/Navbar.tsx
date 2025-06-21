@@ -2,12 +2,14 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
+import { useTheme } from 'next-themes'
 import styles from './Navbar.module.css'
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [trainerLoggedIn, setTrainerLoggedIn] = useState(false)
   const [clientLoggedIn, setClientLoggedIn] = useState(false)
+  const { theme } = useTheme()
   const pathname = usePathname()
   const router = useRouter()
 
@@ -30,8 +32,10 @@ export function Navbar() {
     router.push('/client/login')
   }
 
+  const navClasses = `${styles.navbar} ${theme === 'dark' ? styles.darkNavbar : styles.lightNavbar}`
+
   return (
-    <nav className={`${styles.navbar} force-refresh-123`}>
+    <nav className={navClasses}>
       <div className={styles.container}>
         <Link href='/' className={styles.logo}>
           TrainerPro
