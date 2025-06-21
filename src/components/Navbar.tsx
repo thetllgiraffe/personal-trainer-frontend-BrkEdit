@@ -6,7 +6,6 @@ import styles from './Navbar.module.css'
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const [trainerLoggedIn, setTrainerLoggedIn] = useState(false)
   const [clientLoggedIn, setClientLoggedIn] = useState(false)
   const pathname = usePathname()
@@ -15,19 +14,13 @@ export function Navbar() {
   useEffect(() => {
     setTrainerLoggedIn(!!localStorage.getItem('dashboard_token'))
     setClientLoggedIn(!!localStorage.getItem('client_token'))
-
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
   }, [pathname])
 
   const handleTrainerLogout = () => {
     localStorage.removeItem('dashboard_token')
-    setTrainerLoggedIn(false)
-    router.push('/dashboard/login')
+    localStorage.removeItem('client_name')
+    setClientLoggedIn(false)
+    router.push('/client/login')
   }
 
   const handleClientLogout = () => {
@@ -37,10 +30,8 @@ export function Navbar() {
     router.push('/client/login')
   }
 
-  const navClasses = `${styles.navbar} ${scrolled && !menuOpen ? styles.scrolled : ''}`
-
   return (
-    <nav className={navClasses}>
+    <nav className={styles.navbar}>
       <div className={styles.container}>
         <Link href='/' className={styles.logo}>
           TrainerPro
