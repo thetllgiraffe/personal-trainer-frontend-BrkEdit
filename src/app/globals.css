@@ -230,3 +230,14 @@ body {
 :is(.dark) .custom-calendar .react-calendar__month-view__weekdays {
   opacity: 0.8;
 }
+
+/* Light mode specific styles for high contrast */
+:not(.dark) .custom-calendar .react-calendar__navigation button,
+:not(.dark) .custom-calendar .react-calendar__month-view__weekdays,
+:not(.dark) .custom-calendar .react-calendar__month-view__days__day {
+  color: #111827; /* gray-900 */
+}
+
+:not(.dark) .custom-calendar .react-calendar__month-view__days__day--weekend {
+  color: rgb(var(--primary));
+}
