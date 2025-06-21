@@ -50,9 +50,14 @@ export function Navbar() {
             Booking
           </Link>
           {trainerLoggedIn && (
-            <Link href='/dashboard' className={styles.nav_link}>
-              Trainer Dashboard
-            </Link>
+            <>
+              <Link href='/dashboard' className={styles.nav_link}>
+                Dashboard
+              </Link>
+              <Link href='/dashboard/calendar' className={styles.nav_link}>
+                Calendar
+              </Link>
+            </>
           )}
           {clientLoggedIn && (
             <Link href='/client/dashboard' className={styles.nav_link}>
@@ -109,9 +114,22 @@ export function Navbar() {
             Booking
           </Link>
           {trainerLoggedIn && (
-            <Link href='/dashboard' className={styles.menu_item} onClick={() => setMenuOpen(false)}>
-              Trainer Dashboard
-            </Link>
+            <>
+              <Link
+                href='/dashboard'
+                className={styles.menu_item}
+                onClick={() => setMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+              <Link
+                href='/dashboard/calendar'
+                className={styles.menu_item}
+                onClick={() => setMenuOpen(false)}
+              >
+                Calendar
+              </Link>
+            </>
           )}
           {clientLoggedIn && (
             <Link

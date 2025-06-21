@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { BookingCalendar } from '../components/BookingCalendar'
 import { Testimonials } from '../components/Testimonials'
+import { BookingForm } from '../components/BookingForm'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import emailjs from '@emailjs/browser'
@@ -58,7 +58,7 @@ export default function Home() {
   }
 
   return (
-    <main className='min-h-screen bg-gradient-to-br from-blue-100 via-white to-pink-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900'>
+    <main className='flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 md:p-8 bg-gradient-to-br from-blue-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900'>
       {/* Background Pattern */}
       <div className='absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-10'></div>
 
@@ -244,19 +244,13 @@ export default function Home() {
           <Testimonials />
         </motion.div>
 
-        {/* Booking Calendar Section - Only visible to trainers */}
-        {isTrainer && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className='w-full max-w-6xl mt-24'
-          >
-            <h2 className='text-4xl font-bold text-center bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-400 dark:to-blue-200 text-transparent bg-clip-text mb-10'>
-              Manage Bookings
-            </h2>
-            <BookingCalendar />
-          </motion.div>
-        )}
+        {/* Booking Form Section */}
+        <section id='booking' className='w-full max-w-4xl mt-16 scroll-mt-24'>
+          <h2 className='text-4xl font-bold text-center mb-8 bg-gradient-to-r from-pink-600 to-purple-600 text-transparent bg-clip-text'>
+            Book Your Session
+          </h2>
+          <BookingForm />
+        </section>
 
         {/* Contact Section */}
         <motion.section

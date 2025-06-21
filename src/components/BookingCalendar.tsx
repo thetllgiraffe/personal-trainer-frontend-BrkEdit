@@ -22,12 +22,34 @@ export function BookingCalendar() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
 
   useEffect(() => {
-    const token = localStorage.getItem('dashboard_token')
-    fetch(`${API_URL}/api/bookings`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => setBookings(data))
+    const fetchBookings = async () => {
+      try {
+        const token = localStorage.getItem('dashboard_token')
+        const res = await fetch(`${API_URL}/api/bookings`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+
+        if (!res.ok) {
+          console.error('Failed to fetch bookings:', res.statusText)
+          setBookings([]) // Ensure bookings is always an array
+          return
+        }
+
+        const data = await res.json()
+
+        if (Array.isArray(data)) {
+          setBookings(data)
+        } else {
+          console.error('API did not return an array for bookings.')
+          setBookings([]) // Fallback to an empty array
+        }
+      } catch (error) {
+        console.error('Error fetching bookings:', error)
+        setBookings([]) // Also ensure array on network error
+      }
+    }
+
+    fetchBookings()
   }, [])
 
   // Get bookings for the selected date
