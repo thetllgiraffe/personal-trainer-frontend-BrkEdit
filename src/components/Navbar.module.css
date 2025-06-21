@@ -94,18 +94,19 @@
 }
 
 .mobile_menu {
+  /* Cache-buster: 162134 */
   position: fixed;
-  top: 4rem;
+  top: 4rem; /* Match navbar height */
   left: 0;
   right: 0;
-  bottom: 0;
-  background: limegreen !important;
+  bottom: 0; /* Make it full height */
+  background-color: #0f172a; /* Use a specific solid color (slate-900) */
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  z-index: 40;
-  overflow-y: auto;
+  z-index: 40; /* Ensure it's below the navbar but above content */
+  overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
 @media (min-width: 768px) {

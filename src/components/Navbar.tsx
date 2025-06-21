@@ -42,7 +42,7 @@ export function Navbar() {
             Home
           </Link>
           <Link href='/booking' className={styles.nav_link}>
-            Reservations
+            Booking
           </Link>
           {trainerLoggedIn && (
             <Link href='/dashboard' className={styles.nav_link}>
@@ -97,7 +97,7 @@ export function Navbar() {
             Home
           </Link>
           <Link href='/booking' className={styles.menu_item} onClick={() => setMenuOpen(false)}>
-            Reservations
+            Booking
           </Link>
           {trainerLoggedIn && (
             <Link href='/dashboard' className={styles.menu_item} onClick={() => setMenuOpen(false)}>
