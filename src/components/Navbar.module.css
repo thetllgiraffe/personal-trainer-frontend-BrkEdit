@@ -101,6 +101,10 @@
   color: rgb(var(--foreground));
 }
 
+.lightNavbar .menu_icon {
+  color: #0f172a; /* slate-900 */
+}
+
 .mobile_menu {
   /* Cache-buster: 162134 */
   position: fixed;
@@ -131,6 +135,10 @@
 
 .menu_item:hover {
   background-color: rgb(var(--muted));
+}
+
+.lightNavbar .menu_item {
+  color: #0f172a; /* slate-900 */
 }
 
 .mobile_auth {
